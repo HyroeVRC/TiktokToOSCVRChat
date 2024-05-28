@@ -9,6 +9,7 @@ Better Reading : https://docs.google.com/document/d/1Q8Hfh12RfJzjGYOhaSmSvGoVqKZ
 → First Download PyCharm Community by this link: https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=windows&code=PCC
 
 → Create a New Python Project and create a python file in this folder
+
 ![Capture d'écran 2024-05-28 033232](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/7b3aa6a4-c198-43c1-9e36-794bffa47409)
 ![Capture d'écran 2024-05-28 033244](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/1bdd4cd6-266d-4c34-bc75-d9400d4888a6)
 ![Capture d'écran 2024-05-28 033254](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/f5558576-c473-4042-b67c-1c7454005e31)
