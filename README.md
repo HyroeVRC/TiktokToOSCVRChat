@@ -2,6 +2,8 @@ Hey there it's Hyroe ! :3
 
 I will explain to you how people in your Tiktok Live can interact with your avatar on VRChat.
 
+Better Reading : https://docs.google.com/document/d/1Q8Hfh12RfJzjGYOhaSmSvGoVqKZTlRy5qdYyMNvEByM/edit?usp=sharing
+
 1 / First Step Link Tiktok Chat and send it to the OSC Server :
 
 → First Download PyCharm Community by this link: https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=windows&code=PCC
