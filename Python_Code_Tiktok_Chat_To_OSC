@@ -1,5 +1,3 @@
-import argparse
-import time
 import asyncio
 from pythonosc import udp_client
 from TikTokLive import TikTokLiveClient
@@ -10,10 +8,12 @@ rose = 0
 galaxy = 0
 boop_toggle = 0
 
+
 # Function to send a request to the IP address with the current state of roses, galaxies, crowns, or boop
 def send_request(parameter, value):
     client = udp_client.SimpleUDPClient("127.0.0.1", 9000)
     client.send_message("/avatar/parameters/" + parameter, value)
+
 
 # Define a function to handle gift events
 async def handle_gift(event: GiftEvent):
@@ -32,6 +32,7 @@ async def handle_gift(event: GiftEvent):
         await asyncio.sleep(2)
         send_request("galaxy", 0)  # Send 0 after 2 seconds
 
+
 # Define a function to handle comment events
 async def handle_comment(event: CommentEvent):
     global boop_toggle
@@ -45,15 +46,30 @@ async def handle_comment(event: CommentEvent):
         await asyncio.sleep(2)
         send_request("BoopToggle", 0)  # Send 0 after 2 seconds
 
+
 async def check_gifts_and_comments():
-    client = TikTokLiveClient(unique_id="@hyroe")
+    client = TikTokLiveClient(unique_id="@your_username") # CHANGE YOUR NAMETAGE HERE
     client.on(GiftEvent, handle_gift)
     client.on(CommentEvent, handle_comment)
-    # Wait for the TikTokLive client to be connected
-    await client.connect()
+
+    # Retry mechanism
+    retries = 5
+    for attempt in range(retries):
+        try:
+            await client.connect()
+            break  # Exit loop if successful
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt < retries - 1:
+                await asyncio.sleep(5)  # Wait before retrying
+            else:
+                print("All retry attempts failed.")
+                raise  # Re-raise the exception after final attempt
+
 
 async def main():
     await check_gifts_and_comments()
+
 
 if __name__ == '__main__':
     asyncio.run(main())
