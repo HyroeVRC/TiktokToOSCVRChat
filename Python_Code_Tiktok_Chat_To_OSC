@@ -48,7 +48,7 @@ async def handle_comment(event: CommentEvent):
 
 
 async def check_gifts_and_comments():
-    client = TikTokLiveClient(unique_id="@your_username") # CHANGE YOUR NAMETAGE HERE
+    client = TikTokLiveClient(unique_id="@your_username") # CHANGE YOUR NAMETAG HERE
     client.on(GiftEvent, handle_gift)
     client.on(CommentEvent, handle_comment)
 
