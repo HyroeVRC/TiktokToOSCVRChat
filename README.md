@@ -1,3 +1,8 @@
+
+# 🔴 How People Can Interact With My Avatar In Live ? 👥
+
+![Group 564](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/fc085160-6bb6-41eb-a3e1-0c737d851392)
+
 # Hey there it's Hyroe ! :3
 
 I will explain to you how people in your Tiktok Live can interact with your avatar on VRChat.
