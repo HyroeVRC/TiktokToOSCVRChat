@@ -1,0 +1,59 @@
+import argparse
+import time
+import asyncio
+from pythonosc import udp_client
+from TikTokLive import TikTokLiveClient
+from TikTokLive.events import GiftEvent, CommentEvent
+
+# Variables to track the state of roses, galaxies, and crowns
+rose = 0
+galaxy = 0
+boop_toggle = 0
+
+# Function to send a request to the IP address with the current state of roses, galaxies, crowns, or boop
+def send_request(parameter, value):
+    client = udp_client.SimpleUDPClient("127.0.0.1", 9000)
+    client.send_message("/avatar/parameters/" + parameter, value)
+
+# Define a function to handle gift events
+async def handle_gift(event: GiftEvent):
+    global rose, galaxy, crown
+    # Check the type of gift
+    if event.gift.name == "Rose":
+        rose = 1
+        send_request("rose", 1)  # Send 1 when a rose is received
+        # Wait for 2 seconds
+        await asyncio.sleep(2)
+        send_request("rose", 0)  # Send 0 after 2 seconds
+    elif event.gift.name == "Galaxy":
+        galaxy = 1
+        send_request("galaxy", 1)  # Send 1 when a galaxy is received
+        # Wait for 2 seconds
+        await asyncio.sleep(2)
+        send_request("galaxy", 0)  # Send 0 after 2 seconds
+
+# Define a function to handle comment events
+async def handle_comment(event: CommentEvent):
+    global boop_toggle
+    # Display the message in ASCII in the console
+    print(f"{event.user.nickname}: {event.comment}")
+    # Check if the comment is "boop"
+    if event.comment.lower() == "boop":
+        boop_toggle = 1
+        send_request("BoopToggle", 1)  # Send 1 when "boop" is received
+        # Wait for 2 seconds
+        await asyncio.sleep(2)
+        send_request("BoopToggle", 0)  # Send 0 after 2 seconds
+
+async def check_gifts_and_comments():
+    client = TikTokLiveClient(unique_id="@hyroe")
+    client.on(GiftEvent, handle_gift)
+    client.on(CommentEvent, handle_comment)
+    # Wait for the TikTokLive client to be connected
+    await client.connect()
+
+async def main():
+    await check_gifts_and_comments()
+
+if __name__ == '__main__':
+    asyncio.run(main())
