@@ -16,11 +16,11 @@ class TikTokEventHandler:
         self.tiktok_client.on(CommentEvent, self.handle_comment)
 
     def send_request(self, parameter: str, value: int):
-        """Send a request to the IP address with the current state of the parameter."""
+        # Send a request to the IP address with the current state of the parameter.
         self.client.send_message(f"/avatar/parameters/{parameter}", value)
 
     async def handle_gift(self, event: GiftEvent):
-        """Handle gift events and send appropriate requests."""
+        # Handle gift events and send appropriate requests.
         if event.gift.name == "Rose":
             self.rose = 1
             self.send_request("rose", 1)
@@ -35,7 +35,7 @@ class TikTokEventHandler:
             self.send_request("galaxy", 0)
 
     async def handle_comment(self, event: CommentEvent):
-        """Handle comment events and send appropriate requests."""
+        # Handle comment events and send appropriate requests.
         print(f"{event.user.nickname}: {event.comment}")
         if event.comment.lower() == "boop":
             self.boop_toggle = 1
@@ -45,7 +45,7 @@ class TikTokEventHandler:
             self.send_request("BoopToggle", 0)
 
     async def connect(self):
-        """Attempt to connect to TikTok Live and retry on failure."""
+        # Attempt to connect to TikTok Live and retry on failure.
         retries = 5
         for attempt in range(retries):
             try:
