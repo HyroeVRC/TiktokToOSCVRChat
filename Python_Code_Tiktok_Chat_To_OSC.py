@@ -1,8 +1,9 @@
 import asyncio
 import logging
-from pythonosc import udp_client
+from aioudp import UDPServer
 from TikTokLive import TikTokLiveClient
 from TikTokLive.types.events import GiftEvent, CommentEvent
+import concurrent.futures
 
 # Configuration options
 UDP_IP = "127.0.0.1"
@@ -11,18 +12,18 @@ USERNAME = "@your_username"  # CHANGE YOUR USERNAME HERE
 SLEEP_DURATION = 2  # Duration to sleep after sending a gift or boop
 
 # Function to send a request to the IP address with the current state of a parameter
-def send_request(parameter, value):
-    client = udp_client.SimpleUDPClient(UDP_IP, UDP_PORT)
-    client.send_message(f"/avatar/parameters/{parameter}", value)
+async def send_request(parameter, value):
+    async with UDPServer(UDP_IP, UDP_PORT) as server:
+        await server.send_message(f"/avatar/parameters/{parameter}", value)
 
 # Define a function to handle gift events
 async def handle_gift(event: GiftEvent):
     allowed_events = ["Rose", "Galaxy"]
     event_name = event.gift.name
     if event_name in allowed_events:
-        send_request(event_name.lower(), 1)  # Send 1 when the gift is received
+        await asyncio.run_in_executor(None, send_request, event_name.lower(), 1)  # Send 1 when the gift is received
         await asyncio.sleep(SLEEP_DURATION)
-        send_request(event_name.lower(), 0)  # Send 0 after the specified duration
+        await asyncio.run_in_executor(None, send_request, event_name.lower(), 0)  # Send 0 after the specified duration
 
 # Define a function to handle comment events
 async def handle_comment(event: CommentEvent):
@@ -30,9 +31,9 @@ async def handle_comment(event: CommentEvent):
     logging.info(f"{event.user.nickname}: {event.comment}")
     # Check if the comment is "boop"
     if event.comment.lower() == "boop":
-        send_request("BoopToggle", 1)  # Send 1 when "boop" is received
+        await asyncio.run_in_executor(None, send_request, "BoopToggle", 1)  # Send 1 when "boop" is received
         await asyncio.sleep(SLEEP_DURATION)
-        send_request("BoopToggle", 0)  # Send 0 after the specified duration
+        await asyncio.run_in_executor(None, send_request, "BoopToggle", 0)  # Send 0 after the specified duration
 
 async def check_gifts_and_comments():
     client = TikTokLiveClient(unique_id=USERNAME)
@@ -59,4 +60,3 @@ async def main():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)  # Set logging level
     asyncio.run(main())
-
