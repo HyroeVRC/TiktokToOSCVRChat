@@ -4,7 +4,7 @@ from tkinter import scrolledtext
 import asyncio
 import threading
 import logging
-from aioudp import UDPServer
+from pythonosc import udp_client
 from TikTokLive import TikTokLiveClient
 from TikTokLive.types.events import GiftEvent, CommentEvent
 import socket
@@ -16,6 +16,8 @@ UDP_PORT = 9000
 USERNAME = os.getenv('@username')  # Get username from environment variables
 SLEEP_DURATION = 2  # Duration to sleep after sending a gift or boop
 RETRIES = 5  # Number of retry attempts
+
+client = udp_client.SimpleUDPClient(UDP_IP, UDP_PORT)
 
 def is_udp_server_running(ip, port):
     # Check if the UDP server is running.
@@ -30,8 +32,7 @@ def is_udp_server_running(ip, port):
 async def send_request(parameter, value):
     # Send a request to the IP address with the current state of a parameter.
     if is_udp_server_running(UDP_IP, UDP_PORT):
-        async with UDPServer(UDP_IP, UDP_PORT) as server:
-            await server.send_message(f"/avatar/parameters/{parameter}", value)
+        client.send_message(f"/avatar/parameters/{parameter}", value)
     else:
         logging.error(f"UDP server is not running on {UDP_IP}:{UDP_PORT}")
 
