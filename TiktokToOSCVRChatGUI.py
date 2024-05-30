@@ -13,7 +13,7 @@ import os
 # Configuration options
 UDP_IP = "127.0.0.1"
 UDP_PORT = 9000
-USERNAME = os.getenv('@hyroe')  # Get username from environment variables
+USERNAME = os.getenv('@username')  # Get username from environment variables
 SLEEP_DURATION = 2  # Duration to sleep after sending a gift or boop
 RETRIES = 5  # Number of retry attempts
 
