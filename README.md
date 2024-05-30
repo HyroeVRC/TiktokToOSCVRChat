@@ -24,9 +24,11 @@ Welcome! I'll guide you through how your audience on TikTok Live can interact wi
 ➥ Copy and paste the provided code and install the required libraries:
 
 - Install the `TiktokLive` package :
+
   ![Install TiktokLive](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/4597f5a0-6f6a-447b-8261-60fee8fabf33)
 
 - Import the `python-osc` package from GitHub :
+
   ![Import python-osc](https://github.com/HyroeVRC/TiktokToOSC/assets/170990155/c7d4fa9b-0182-4f69-a528-291f2a9bcf48)
 
 ### Step 4 : Configure Your TikTok Name Tag
