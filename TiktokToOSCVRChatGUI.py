@@ -75,7 +75,7 @@ async def start_event_handling():
     try:
         await check_gifts_and_comments()
     except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")
+        logging.error(f"An unexpected error occurred : {e}")
 
 def run_asyncio_task(loop, task):
     asyncio.set_event_loop(loop)
@@ -119,17 +119,19 @@ class TextHandler(logging.Handler):
 # GUI Setup
 root = tk.Tk()
 root.title("TikTok Live Event Handler")
-root.geometry("500x600")
-root.resizable(False, False)
+root.geometry("600x700")
+root.resizable(True, True)
 
 style = ttk.Style()
 style.configure("TButton", font=("Helvetica", 12), padding=10)
 style.configure("TLabel", font=("Helvetica", 12))
+style.configure("TFrame", padding=10)
+style.configure("TLabelFrame", font=("Helvetica", 12), padding=10)
 
 main_frame = ttk.Frame(root, padding="10 10 10 10")
 main_frame.pack(fill=tk.BOTH, expand=True)
 
-label = ttk.Label(main_frame, text="TikTok Live Event Handler", anchor="center")
+label = ttk.Label(main_frame, text="TikTok Live Event Handler", anchor="center", font=("Helvetica", 16, "bold"))
 label.pack(pady=10)
 
 start_button = ttk.Button(main_frame, text="Start Event Handling", command=start_button_click)
@@ -148,11 +150,12 @@ boop_button.pack(pady=10, fill=tk.X)
 log_frame = ttk.LabelFrame(main_frame, text="Logs")
 log_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-log_text = scrolledtext.ScrolledText(log_frame, wrap=tk.WORD, height=10, state='disabled')
+log_text = scrolledtext.ScrolledText(log_frame, wrap=tk.WORD, height=10, state='disabled', font=("Helvetica", 10))
 log_text.pack(fill=tk.BOTH, expand=True)
 
 # Set up logging to the text widget
 text_handler = TextHandler(log_text)
 logging.basicConfig(level=logging.INFO, handlers=[text_handler])
 
+# Start the Tkinter event loop
 root.mainloop()
