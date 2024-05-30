@@ -9,7 +9,7 @@ I will explain to you how people in your Tiktok Live can interact with your avat
 
 ## 1 / First Step Link Tiktok Chat and send it to the OSC Server :
 
-→ First Download PyCharm Community by this link: https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=windows&code=PCC
+→ First Download PyCharm Community by this link: [Download](https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=windows&code=PCC)
 
 → Create a New Python Project and create a python file in this folder
 
