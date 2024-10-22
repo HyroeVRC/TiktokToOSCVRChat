@@ -104,3 +104,9 @@ Have a wonderful day/night !
 - [Instagram](https://www.instagram.com/hyroevr/)
 
 Boop from Hyroe :3
+
+
+![ttov0 3](https://github.com/user-attachments/assets/3340da5c-93dd-42c7-b6ac-850850c0fb34)
+
+![updates](https://github.com/user-attachments/assets/ecb1128f-a351-4c3e-bae2-970597da4cf8)
+
